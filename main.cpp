@@ -2,12 +2,12 @@
 #include <vector>
 #include <climits>
 
-using TUll = unsigned long long;
-static const TUll INFINITY = LLONG_MAX;
+using TLl = long long;
+static const TLl INFINITY = INT_MAX;
 static const int NONE = -2;
 
-void solve(const std::vector<std::vector<TUll> >& matrix, int n, int m) {
-    std::vector<std::vector<std::pair<TUll, int> > > memo(n, std::vector<std::pair<TUll, int> >(m, std::make_pair(INFINITY, -1)));
+void solve(const std::vector<std::vector<TLl> >& matrix, int n, int m) {
+    std::vector<std::vector<std::pair<TLl, int> > > memo(n, std::vector<std::pair<TLl, int> >(m, std::make_pair(INFINITY, NONE)));
     for (int j = 0; j < m; ++j) {
         memo[0][j] = std::make_pair(matrix[0][j], NONE);
     }
@@ -26,7 +26,7 @@ void solve(const std::vector<std::vector<TUll> >& matrix, int n, int m) {
         }
     }
 
-    TUll minPathVal = INFINITY;
+    TLl minPathVal = INFINITY;
     int minPathValIdx = NONE;
     for (int j = 0; j < m; ++j) {
         if (memo[n-1][j].first < minPathVal) {
@@ -49,6 +49,7 @@ void solve(const std::vector<std::vector<TUll> >& matrix, int n, int m) {
     for (int i = path.size() - 1; i >= 0; --i) {
         std::cout << "(" << path[i].first + 1 << "," << path[i].second + 1 << ") ";
     }
+    std::cout << "\n";
 }
 
 int main() {
@@ -57,7 +58,7 @@ int main() {
     
     int n, m;
     std::cin >> n >> m;
-    std::vector<std::vector<TUll> > matrix(n, std::vector<TUll>(m, 0));
+    std::vector<std::vector<TLl> > matrix(n, std::vector<TLl>(m, 0));
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < m; ++j) {
             std::cin >> matrix[i][j];
